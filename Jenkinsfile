@@ -1,11 +1,13 @@
 pipeline {
     agent any
-
+    environment {
+        DOCKER_IMAGE = "monsitecrypto:${env.BUILD_ID}"
+    }
     stages {
         stage('Build') {
             steps {
                 script {
-                    docker.build("monsitecrypto:${env.BUILD_ID}")
+                    docker.build(env.DOCKER_IMAGE)
                 }
             }
         }
